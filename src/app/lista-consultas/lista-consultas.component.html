@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <button class="btn btn-secondary" title="Go back" (click)="back()">
+                    <span class="fas fa-arrow-circle-left"></span>
+                </button>
+            </div>
+            <br/>
+        </div>
+    </div>
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-11">
+                <h2>Lista De Consultas
+                </h2>
+                </div>
+                <div class="pull-right">
+                    <button type="button" title="Add Parameter" class="btn btn-default" (click)="agregarConsulta()" style="margin-right: 8px;">
+                        <span class="fas fa-plus"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <br/>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Monto</th>
+                <th scope="col">Fecha</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let consulta of listaDeConsultas; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{consulta.descripcion}}</td>
+                    <td>{{consulta.costo}}</td>
+                    <td>{{consulta.fecha | date:'dd/MM/yyyy'}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

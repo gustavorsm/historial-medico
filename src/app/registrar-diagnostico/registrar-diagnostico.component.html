@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <button class="btn btn-secondary" title="Go back" (click)="back()">
+                    <span class="fas fa-arrow-circle-left"></span>
+                </button>
+            </div>
+            <br/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+          <h2>Añadir Diagnostico
+          </h2>
+        </div>
+      </div>
+    <form name="form" class="form-horizontal" #registroDiagnosticoForm='ngForm'>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Descripcion</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="descripcion" required value="" [(ngModel)]="diagnostico.descripcion" (ngModelChange)="edited = true">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Categoria</label>
+          <div class="col-sm-10">
+              <select class="form-control" required [(ngModel)]="diagnostico.categoria" (ngModelChange)="edited=true" name="configuracionCategoria">
+                <option *ngFor="let categoria of categories" [value]="categoria" [selected]="categoria == diagnostico.categoria"> 
+                  {{categoria}}
+                </option>
+              </select>        
+          </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Fecha</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" required name="fecha" value="" [(ngModel)]="diagnostico.fecha" (ngModelChange)="edited = true" pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$"
+              placeholder="Formato: DD/MM/YYYY">
+            </div>
+          </div>
+      </form>
+      <br>
+      <div style="float: right">
+        <button class="btn btn-default" (click)="clear()">Limpiar</button>
+        <button [disabled]="!edited || !registroDiagnosticoForm.valid" (click)="agregarDiagnostico()" class="btn btn-default blue">Guardar</button>
+      </div>
+</div>
+
