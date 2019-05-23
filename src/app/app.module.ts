@@ -19,6 +19,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ConexionService } from './services/conexion.service';
 
+import { EditarAnalisisComponent } from './editar-analisis/editar-analisis.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +28,7 @@ import { ConexionService } from './services/conexion.service';
     ListaDeAnalisisComponent,
     ListaDeDiagnosticosComponent,
     ListaDeTratamientosComponent,
+    EditarAnalisisComponent,
     HistorialComponent,
     RegistrarAnalisisComponent,
     RegistrarConsultaComponent,

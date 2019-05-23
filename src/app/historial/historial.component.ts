@@ -83,6 +83,9 @@ export class HistorialComponent implements OnInit {
 
   RedirectTo(value:any){
     switch(value){
+      case "historial":
+      this.router.navigateByUrl('/historial')
+      break;
       case "listaDeAnalisis":
       this.router.navigateByUrl('/listaDeAnalisis');
       break;

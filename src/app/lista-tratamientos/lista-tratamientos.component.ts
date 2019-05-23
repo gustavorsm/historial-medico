@@ -55,4 +55,23 @@ export class ListaDeTratamientosComponent implements OnInit {
   back() {
     this.router.navigateByUrl('/historial');
   }
+  RedirectTo(value:any){
+    switch(value){
+      case "historial":
+      this.router.navigateByUrl('/historial')
+      break;
+      case "listaDeAnalisis":
+      this.router.navigateByUrl('/listaDeAnalisis');
+      break;
+      case "listaDeConsultas":
+      this.router.navigateByUrl('/listaDeConsultas');
+      break;
+      case "listaDeDiagnosticos":
+      this.router.navigateByUrl('/listaDeDiagnosticos');
+      break;
+      case "listaDeTratamientos":
+      this.router.navigateByUrl('/listaDeTratamientos');
+      break;
+    }
+  }
 }

@@ -85,5 +85,8 @@ export class ConexionService {
   anadirTratamiento(tratamiento : Tratamiento){
     this.tratamientosColecction.add(tratamiento);
   }
-  
+  editarAnalisis(analisis){
+    this.analisisDoc = this.afs.doc<Analisis>(`analisis/${analisis.id}`);
+    this.analisisDoc.update(analisis);
+  }
 }

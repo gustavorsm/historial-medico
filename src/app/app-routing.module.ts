@@ -9,7 +9,7 @@ import { RegistrarAnalisisComponent } from './registrar-analisis/registrar-anali
 import { RegistrarConsultaComponent } from './registrar-consulta/registrar-consulta.component';
 import { RegistrarDiagnosticoComponent } from './registrar-diagnostico/registrar-diagnostico.component';
 import { RegistrarTratamientoComponent } from './registrar-tratamiento/registrar-tratamiento.component';
-
+import { EditarAnalisisComponent } from './editar-analisis/editar-analisis.component';
 const routes: Routes = [
   { path: '', redirectTo: '/historial', pathMatch: 'full', canActivate: [] },
   { path: 'listaDeAnalisis', component: ListaDeAnalisisComponent },
@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'registrarConsulta', component: RegistrarConsultaComponent },
   { path: 'registrarDiagnostico', component: RegistrarDiagnosticoComponent },
   { path: 'registrarTratamiento', component: RegistrarTratamientoComponent },
+  { path: 'editarAnalisis/:auth', component: EditarAnalisisComponent },
   { path: 'historial', component: HistorialComponent, canActivate: [] },
   //{ path: 'viewUser/:id', component: UserDetailsComponent },
 ];
