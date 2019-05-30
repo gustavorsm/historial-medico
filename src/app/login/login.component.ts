@@ -34,21 +34,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  searchAccount(){
-    for(let i = 0; i<this.listaDeUsuarios.length;i++){
-      if(this.listaDeUsuarios[i].nombre == this.usuario.nombre && this.listaDeUsuarios[i].contrasena==this.usuario.contrasena){
-        return true;
-      }
-    }
-     
-  }
-
   login() {
     this.conexionService.listaDeUsuarios().subscribe(usuario=>{
+      let usuarioLogeado = {};
       this.listaDeUsuarios = usuario;
       for(let i = 0 ; i < this.listaDeUsuarios.length ; i++){
         if(this.listaDeUsuarios[i].nombre == this.usuario.nombre && this.listaDeUsuarios[i].contrasena == this.usuario.contrasena){
-          let usuarioLogeado = {
+          usuarioLogeado = {
             auth : this.listaDeUsuarios[i].auth,
             nombre : this.listaDeUsuarios[i].nombre
           }

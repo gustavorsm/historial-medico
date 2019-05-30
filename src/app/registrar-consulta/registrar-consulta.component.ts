@@ -21,9 +21,13 @@ export class RegistrarConsultaComponent implements OnInit {
     this.router.navigateByUrl('/listaDeConsultas');
   }
 
+  generateId() {
+    return Math.floor(Math.random() * 100000) + 100;
+  }
   agregarConsulta(){
       let usuarioLogeado = JSON.parse(localStorage.getItem("UserLogged"));
       this.consulta.auth= usuarioLogeado.auth;
+      this.consulta.iden= this.generateId();
       this.conexionService.anadirConsulta(this.consulta);
       this.router.navigateByUrl('/listaDeConsultas');
   }

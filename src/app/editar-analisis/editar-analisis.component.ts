@@ -18,7 +18,7 @@ export class EditarAnalisisComponent implements OnInit {
   ngOnInit() {
     this.inizializarAnalisis();
     let found = this.route.params.subscribe(params => {
-      let auth = +params['auth'];
+      let auth = +params['iden'];
       this.analisisId=auth;
    });
    this.edited=false;
@@ -31,7 +31,7 @@ export class EditarAnalisisComponent implements OnInit {
   }
   searchExpense(){
     for(let i = 0; i<this.listaDeAnalisis.length;i++)
-      if(this.listaDeAnalisis[i].auth==this.analisisId){
+      if(this.listaDeAnalisis[i].iden==this.analisisId){
         this.analisis = this.listaDeAnalisis[i];
       }
   }

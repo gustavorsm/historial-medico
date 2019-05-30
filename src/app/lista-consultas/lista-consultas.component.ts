@@ -38,7 +38,7 @@ export class ListaDeConsultasComponent implements OnInit {
     let aux;
     for(let i=0;i<consultas.length-1;i++){
       for(let j=i+1;j<consultas.length;j++){
-        if(this.parsearFecha(consultas[i].date)<this.parsearFecha(consultas[j].date)){
+        if(this.parsearFecha(consultas[i].fecha)<this.parsearFecha(consultas[j].fecha)){
           aux=consultas[i];
           consultas[i]=consultas[j];
           consultas[j]=aux;
@@ -47,17 +47,17 @@ export class ListaDeConsultasComponent implements OnInit {
     }
   }
 
-  parsearFecha(date:any){
+  parsearFecha(fecha:any){
     let dia;
     let mes;
     let anio;
-    dia = date.substring(date.indexOf("/")+1,date.lastIndexOf("/"));
+    dia = fecha.substring(fecha.indexOf("/")+1,fecha.lastIndexOf("/"));
     if(dia.length==1)
       dia = "0"+dia;
-    mes = date.substring(0, date.indexOf("/"));
+    mes = fecha.substring(0, fecha.indexOf("/"));
     if(mes.length==1)
     mes = "0"+mes;
-    anio = date.substring(date.lastIndexOf("/")+1,date.length);
+    anio = fecha.substring(fecha.lastIndexOf("/")+1,fecha.length);
     return parseInt(anio+mes+dia);
   }
 
@@ -66,7 +66,7 @@ export class ListaDeConsultasComponent implements OnInit {
   }
 
   editarConsulta(consulta:any){
-    this.router.navigate(['/editarConsulta', consulta.auth])
+    this.router.navigate(['/editarConsulta', consulta.iden])
   }
 
   borrarConsulta(consulta){

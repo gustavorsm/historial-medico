@@ -56,7 +56,7 @@ export class ListaDeDiagnosticosComponent implements OnInit {
     this.router.navigateByUrl('/registrarDiagnostico');
   }
   editarDiagnostico(diagnostico:any){
-    this.router.navigate(['/editarDiagnostico', diagnostico.auth])
+    this.router.navigate(['/editarDiagnostico', diagnostico.iden])
   }
   eliminarDiagnostico(diagnostico){
     this.conexionService.eliminarDiagnostico(diagnostico);

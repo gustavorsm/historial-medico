@@ -73,7 +73,7 @@ export class ListaDeAnalisisComponent implements OnInit {
   }
 
   editarAnalisis(analisis:any){
-    this.router.navigate(['/editarAnalisis', analisis.auth])
+    this.router.navigate(['/editarAnalisis', analisis.iden])
   }
   RedirectTo(value:any){
     switch(value){

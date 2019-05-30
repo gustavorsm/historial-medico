@@ -21,9 +21,14 @@ export class RegistrarTratamientoComponent implements OnInit {
     this.router.navigateByUrl('/listaDeTratamientos');
   }
 
+  generateId() {
+    return Math.floor(Math.random() * 100000) + 100;
+  }
+
   agregarTratamiento(){
       let usuarioLogeado = JSON.parse(localStorage.getItem("UserLogged"));
       this.tratamiento.auth= usuarioLogeado.auth;
+      this.tratamiento.iden= this.generateId();
       this.conexionService.anadirTratamiento(this.tratamiento);
       this.router.navigateByUrl('/listaDeTratamientos');
   }

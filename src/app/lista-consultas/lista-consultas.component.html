@@ -56,6 +56,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let consulta of listaDeConsultas; let i = index">
+                    <td>{{i+1}}</td>
                     <td>{{consulta.doctor}}</td>
                     <td>{{consulta.sintomas}}</td>
                     <td>{{consulta.descripcion}}</td>

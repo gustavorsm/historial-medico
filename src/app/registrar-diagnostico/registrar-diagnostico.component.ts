@@ -21,9 +21,14 @@ export class RegistrarDiagnosticoComponent implements OnInit {
     this.router.navigateByUrl('/listaDeDiagnosticos');
   }
 
+  generateId() {
+    return Math.floor(Math.random() * 100000) + 100;
+  }
+
   agregarDiagnostico(){
       let usuarioLogeado = JSON.parse(localStorage.getItem("UserLogged"));
       this.diagnostico.auth= usuarioLogeado.auth;
+      this.diagnostico.iden= this.generateId();
       this.conexionService.anadirDiagnostico(this.diagnostico);
       this.router.navigateByUrl('/listaDeDiagnosticos');
   }

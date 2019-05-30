@@ -56,7 +56,7 @@ export class ListaDeTratamientosComponent implements OnInit {
   }
 
   editarTratamiento(tratamiento:any){
-    this.router.navigate(['/editarTratamiento', tratamiento.auth])
+    this.router.navigate(['/editarTratamiento', tratamiento.iden])
   }
   borrarTratamiento(tratamiento){
     this.conexionService.eliminarTratamiento(tratamiento);

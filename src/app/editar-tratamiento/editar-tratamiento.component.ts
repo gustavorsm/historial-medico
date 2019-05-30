@@ -18,7 +18,7 @@ export class EditarTratamientoComponent implements OnInit {
   ngOnInit() {
     this.inizializarAnalisis();
     let found = this.route.params.subscribe(params => {
-      let auth = +params['auth'];
+      let auth = +params['iden'];
       this.tratamientoId=auth;
    });
    this.edited=false;
@@ -31,7 +31,7 @@ export class EditarTratamientoComponent implements OnInit {
   }
   searchExpense(){
     for(let i = 0; i<this.listaDeTratamientos.length;i++)
-      if(this.listaDeTratamientos[i].auth==this.tratamientoId){
+      if(this.listaDeTratamientos[i].iden==this.tratamientoId){
         this.tratamiento = this.listaDeTratamientos[i];
       }
   }

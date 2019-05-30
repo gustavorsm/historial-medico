@@ -18,7 +18,7 @@ export class EditarConsultaComponent implements OnInit {
   ngOnInit() {
     this.inizializarConsulta();
     let found = this.route.params.subscribe(params => {
-      let auth = +params['auth'];
+      let auth = +params['iden'];
       this.consultaId=auth;
    });
    this.edited=false;
@@ -31,7 +31,7 @@ export class EditarConsultaComponent implements OnInit {
   }
   searchExpense(){
     for(let i = 0; i<this.listaDeConsultas.length;i++)
-      if(this.listaDeConsultas[i].auth==this.consultaId){
+      if(this.listaDeConsultas[i].iden==this.consultaId){
         this.consulta = this.listaDeConsultas[i];
       }
   }

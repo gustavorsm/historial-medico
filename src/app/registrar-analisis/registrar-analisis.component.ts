@@ -21,9 +21,14 @@ export class RegistrarAnalisisComponent implements OnInit {
     this.router.navigateByUrl('/listaDeAnalisis');
   }
 
+  generateId() {
+    return Math.floor(Math.random() * 100000) + 100;
+  }
+
   agregarAnalisis(){
       let usuarioLogeado = JSON.parse(localStorage.getItem("UserLogged"));
       this.analisis.auth= usuarioLogeado.auth;
+      this.analisis.iden= this.generateId();
       this.conexionService.anadirAnalisis(this.analisis);
       this.router.navigateByUrl('/listaDeAnalisis');
   }
