@@ -14,8 +14,12 @@ export class ListaDeDiagnosticosComponent implements OnInit {
   constructor(private router: Router,private conexionService: ConexionService) { }
 
   ngOnInit() {
-    this.conexionService.listaDeDiagnosticos().subscribe(analisis=>{
-      this.listaDeDiagnosticos =analisis;
+    this.conexionService.listaDeDiagnosticos().subscribe(diagnostico=>{
+      this.listaDeDiagnosticos=[];
+      let usuarioLogeado = JSON.parse(localStorage.getItem("UserLogged"));
+      diagnostico.forEach((element:any) => {
+        if(element.auth == usuarioLogeado.auth) this.listaDeDiagnosticos.push(element);
+      });
       this.verificarOrden(this.listaDeDiagnosticos);
     });
   }
@@ -51,12 +55,21 @@ export class ListaDeDiagnosticosComponent implements OnInit {
   agregarDiagnostico(){
     this.router.navigateByUrl('/registrarDiagnostico');
   }
+  editarDiagnostico(diagnostico:any){
+    this.router.navigate(['/editarDiagnostico', diagnostico.auth])
+  }
+  eliminarDiagnostico(diagnostico){
+    this.conexionService.eliminarDiagnostico(diagnostico);
+  }
 
   back() {
     this.router.navigateByUrl('/historial');
   }
   RedirectTo(value:any){
     switch(value){
+      case "usuario":
+      this.router.navigateByUrl('/verUsuario')
+      break;
       case "historial":
       this.router.navigateByUrl('/historial')
       break;
@@ -73,5 +86,10 @@ export class ListaDeDiagnosticosComponent implements OnInit {
       this.router.navigateByUrl('/listaDeTratamientos');
       break;
     }
+  }
+  logout(){
+    if (localStorage.getItem('UserLogged'))
+    localStorage.removeItem('UserLogged');
+    this.router.navigateByUrl('/login');
   }
 }

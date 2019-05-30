@@ -35,13 +35,16 @@ export class EditarAnalisisComponent implements OnInit {
         this.analisis = this.listaDeAnalisis[i];
       }
   }
+
   back() {
     this.router.navigateByUrl('/listaDeAnalisis');
   }
-  saveExpense(){
+
+  editarAnalisis(){
     this.conexionService.editarAnalisis(this.analisis);
     this.router.navigateByUrl('/listaDeAnalisis');
   }
+
   clear(){
     this.analisis={};
   }

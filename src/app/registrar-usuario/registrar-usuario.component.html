@@ -1,0 +1,40 @@
+<div class="col-md-6 col-md-offset-3">
+    <h2>Registrar</h2>
+    <form name="form" #registryAccountForm='ngForm'>
+      <div class="form-group">
+        <label for="nombre">Nombre De Usuario</label>
+        <input type="text" class="form-control" required name="nombre" (input)="nombreValida=true; nombreErronea=false" 
+          [(ngModel)]="usuario.nombre">
+      </div>
+      <div class="form-group">
+        <label for="contrasena">Apellido</label>
+        <input type="contrasena" class="form-control" required name="apellido"
+          [(ngModel)]="usuario.apellido">
+      </div>
+      <div class="form-group">
+        <label for="correo">Correo</label>
+        <input type="correo" class="form-control" required name="correo"
+          [(ngModel)]="usuario.correo">
+      </div>
+      <div class="form-group">
+        <label for="fecha">Fecha De Nacimiento</label>
+        <input type="fecha" class="form-control" required name="fecha"
+          [(ngModel)]="usuario.fecha" pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$">
+      </div>
+      <div class="form-group">
+        <label for="contrasena">Contraseña</label>
+        <input type="contrasena" class="form-control" required name="contrasena" (input)="contrasenaValida=true; contraseErronea=false"
+          [(ngModel)]="usuario.contrasena">
+      </div>
+      <div class="form-group">
+        <label for="contrasenaConfirmacion">Confirmar contraseña</label>
+        <input type="contrasena" class="form-control" required name="Confirmar" (input)="confirmacionValida=true; confirmacionErronea=false"
+          [(ngModel)]="usuario.contrasenaConfirmacion">
+      </div>
+      <div class="form-group">
+        <button [disabled]="loading || !registryAccountForm.valid" class="btn btn-primary" (click)="agregarUsuario()">Registrarse</button>
+        <a [routerLink]="['/login']" class="btn btn-link">Cancelar</a>
+      </div>
+      <div *ngIf="(usuario.contrasena != usuario.contrasenaConfirmacion)" class="help-block" style="color: tomato">Las contraseñas no coinciden</div>
+    </form>
+  </div>

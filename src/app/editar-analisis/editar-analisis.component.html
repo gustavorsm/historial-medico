@@ -16,17 +16,22 @@
             </div>
           </div>
         <form name="form" class="form-horizontal" #editarAnalisisForm='ngForm'>
-            <div class="form-group row">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Doctor</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="doctor" required value="" [(ngModel)]="analisis.doctor" (ngModelChange)="edited = true">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Resultado</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="resultados" required value="" [(ngModel)]="analisis.resultados" (ngModelChange)="edited = true">
+            </div>
+          </div>    
+          <div class="form-group row">
               <label class="col-sm-2 col-form-label">Descripcion</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" name="descripcion" required value="" [(ngModel)]="analisis.descripcion" (ngModelChange)="edited = true">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword" class="col-sm-2 col-form-label">Monto</label>
-              <div class="col-sm-10">
-                <input type="number" [min]="0"class="form-control" required name="costo" [(ngModel)]="analisis.costo" (ngModelChange)="edited = true"
-                placeholder="Min: 0.1">
               </div>
             </div>
             <div class="form-group row">
@@ -40,7 +45,7 @@
           <br>
           <div class="col-sm-pull-4">
             <button class="btn btn-default" (click)="clear()">Limpiar</button>
-            <button [disabled]="!edited || !editarAnalisisForm.valid" (click)="saveExpense()" class="btn btn-default blue">Editar</button>
+            <button [disabled]="!edited || !editarAnalisisForm.valid" (click)="editarAnalisis()" class="btn btn-default blue">Editar</button>
           </div>
     </div>
     

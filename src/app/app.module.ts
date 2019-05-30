@@ -18,8 +18,16 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ConexionService } from './services/conexion.service';
+import { LoginComponent } from './login/login.component';
+import { AuthAccountGuard } from './guards/authAccount.guard';
+import { AuthUserGuard } from './guards/authUser.guard';
 
 import { EditarAnalisisComponent } from './editar-analisis/editar-analisis.component';
+import { EditarConsultaComponent } from './editar-consulta/editar-consulta.component';
+import { EditarTratamientoComponent } from './editar-tratamiento/editar-tratamiento.component';
+import { EditarDiagnosticoComponent } from './editar-diagnostico/editar-diagnostico.component';
+import { RegistrarUsuarioComponent } from './registrar-usuario/registrar-usuario.component';
+import { MostrarUsuarioComponent } from './ver-usuario/ver-usuario.component';
 
 @NgModule({
   declarations: [
@@ -29,11 +37,17 @@ import { EditarAnalisisComponent } from './editar-analisis/editar-analisis.compo
     ListaDeDiagnosticosComponent,
     ListaDeTratamientosComponent,
     EditarAnalisisComponent,
+    EditarConsultaComponent,
+    EditarTratamientoComponent,
+    EditarDiagnosticoComponent,
     HistorialComponent,
     RegistrarAnalisisComponent,
     RegistrarConsultaComponent,
     RegistrarDiagnosticoComponent,
-    RegistrarTratamientoComponent
+    RegistrarTratamientoComponent,
+    RegistrarUsuarioComponent,
+    LoginComponent,
+    MostrarUsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +58,7 @@ import { EditarAnalisisComponent } from './editar-analisis/editar-analisis.compo
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule // imports firebase/storage only needed for storage features
   ],
-  providers: [ConexionService],
+  providers: [ConexionService, AuthAccountGuard, AuthUserGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

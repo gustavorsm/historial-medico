@@ -18,14 +18,28 @@ export class HistorialComponent implements OnInit {
   constructor(private router: Router,private conexionService: ConexionService) { }
 
   ngOnInit() {
+    this.iniciarHistorial();
+    let usuarioLogeado = JSON.parse(localStorage.getItem("UserLogged"));
     this.conexionService.listaDeConsultas().subscribe(consulta=>{
-      this.listaDeConsultas = consulta;
+      this.listaDeConsultas=[];
+      consulta.forEach((element:any) => {
+        if(element.auth == usuarioLogeado.auth) this.listaDeConsultas.push(element);
+      });
       this.conexionService.listaDeAnalisis().subscribe(analisis=>{
-        this.listaDeAnalisis =analisis;
+        this.listaDeAnalisis=[];
+        analisis.forEach((element:any) => {
+          if(element.auth == usuarioLogeado.auth) this.listaDeAnalisis.push(element);
+        });
         this.conexionService.listaDeDiagnosticos().subscribe(diagnostico=>{
-          this.listaDeDiagnosticos =diagnostico;
+          this.listaDeDiagnosticos=[];
+          diagnostico.forEach((element:any) => {
+            if(element.auth == usuarioLogeado.auth) this.listaDeDiagnosticos.push(element);
+          });
           this.conexionService.listaDeTratamientos().subscribe(tratamiento=>{
-            this.listaDeTratamientos = tratamiento;
+            this.listaDeTratamientos=[];
+            tratamiento.forEach((element:any) => {
+              if(element.auth == usuarioLogeado.auth) this.listaDeTratamientos.push(element);
+            });
             this.crearHistorial();
             this.verificarOrden(this.historial);
           })
@@ -33,7 +47,14 @@ export class HistorialComponent implements OnInit {
       });
     })
   }
-    
+  
+  iniciarHistorial(){
+    this.listaDeTratamientos = [];
+    this.listaDeAnalisis = [];
+    this.listaDeConsultas = [];
+    this.listaDeDiagnosticos = [];
+    this.historial = [];
+  }
   crearHistorial(){
     this.listaDeAnalisis.forEach((element:any) => {
       element.tipo = "analisis";
@@ -51,7 +72,6 @@ export class HistorialComponent implements OnInit {
       element.tipo = "diagnostico";
       this.historial.push(element)
     });
-    console.log("this",this.historial);
   }
 
   verificarOrden(historial:any){
@@ -83,6 +103,9 @@ export class HistorialComponent implements OnInit {
 
   RedirectTo(value:any){
     switch(value){
+      case "usuario":
+      this.router.navigateByUrl('/verUsuario')
+      break;
       case "historial":
       this.router.navigateByUrl('/historial')
       break;
@@ -100,5 +123,12 @@ export class HistorialComponent implements OnInit {
       break;
     }
   }
+  logout(){
+    if (localStorage.getItem('UserLogged'))
+      localStorage.removeItem('UserLogged');
+      this.router.navigateByUrl('/login');
+  }
+  
+
 
 }

@@ -15,7 +15,11 @@ export class ListaDeTratamientosComponent implements OnInit {
 
   ngOnInit() {
     this.conexionService.listaDeTratamientos().subscribe(tratamiento=>{
-      this.listaDeTratamientos =tratamiento;
+      this.listaDeTratamientos=[];
+      let usuarioLogeado = JSON.parse(localStorage.getItem("UserLogged"));
+      tratamiento.forEach((element:any) => {
+        if(element.auth == usuarioLogeado.auth) this.listaDeTratamientos.push(element);
+      });
       this.verificarOrden(this.listaDeTratamientos);
     });
   }
@@ -47,16 +51,21 @@ export class ListaDeTratamientosComponent implements OnInit {
     anio = fecha.substring(fecha.lastIndexOf("/")+1,fecha.length);
     return parseInt(anio+mes+dia);
   }
-
   agregarTratamiento(){
     this.router.navigateByUrl('/registrarTratamiento');
   }
 
-  back() {
-    this.router.navigateByUrl('/historial');
+  editarTratamiento(tratamiento:any){
+    this.router.navigate(['/editarTratamiento', tratamiento.auth])
+  }
+  borrarTratamiento(tratamiento){
+    this.conexionService.eliminarTratamiento(tratamiento);
   }
   RedirectTo(value:any){
     switch(value){
+      case "usuario":
+      this.router.navigateByUrl('/verUsuario')
+      break;
       case "historial":
       this.router.navigateByUrl('/historial')
       break;
@@ -74,4 +83,10 @@ export class ListaDeTratamientosComponent implements OnInit {
       break;
     }
   }
+  logout(){
+    if (localStorage.getItem('UserLogged'))
+    localStorage.removeItem('UserLogged');
+    this.router.navigateByUrl('/login');
+  }
+
 }

@@ -1,0 +1,52 @@
+<div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    <button class="btn btn-secondary" title="Atras" (click)="back()">
+                        <span class="fas fa-arrow-circle-left"></span>
+                    </button>
+                </div>
+                <br/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+              <h2>Editar Consulta
+              </h2>
+            </div>
+          </div>
+        <form name="form" class="form-horizontal" #editarConsultaForm='ngForm'>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Doctor</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="doctor" required value="" [(ngModel)]="consulta.doctor" (ngModelChange)="edited = true">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Sintomas</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="sintomas" required value="" [(ngModel)]="consulta.sintomas" (ngModelChange)="edited = true">
+              </div>
+            </div>    
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Descripcion</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="descripcion" required value="" [(ngModel)]="consulta.descripcion" (ngModelChange)="edited = true">
+              </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Fecha</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" required name="fecha" value="" [(ngModel)]="consulta.fecha" (ngModelChange)="edited = true" pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$"
+                  placeholder="Formato: DD/MM/YYYY">
+                </div>
+              </div>
+          </form>
+          <br>
+          <div class="col-sm-pull-4">
+            <button class="btn btn-default" (click)="clear()">Limpiar</button>
+            <button [disabled]="!edited || !editarConsultaForm.valid" (click)="editarConsulta()" class="btn btn-default blue">Editar</button>
+          </div>
+    </div>
+    
+    

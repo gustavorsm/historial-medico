@@ -1,0 +1,23 @@
+<div class="col-md-6 col-md-offset-3">
+    <h2>Login</h2>
+    <form name="form">
+      <div class="form-group">
+        <label for="name">Usuario</label>
+        <input type="text" class="form-control" name="name" (input)="usernameValidator=true; usernameError=false"
+          [(ngModel)]="usuario.nombre" />
+        <div *ngIf="!firstTime && usernameError" class="help-block" style="color: tomato">El nombre de usuario es obligatorio</div>
+      </div>
+      <div class="form-group">
+        <label for="contrasena">Contraseña</label>
+        <input type="contrasena" class="form-control" name="contrasena" (input)="passwordValidator=true; passwordError=false"
+          [(ngModel)]="usuario.contrasena" />
+        <div *ngIf="!firstTime && passwordError" class="help-block" style="color: tomato">La contraseña es obligatoria</div>
+      </div>
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary" (click)="login()">Login</button>
+        <a [routerLink]="['/registrarUsuario']" class="btn btn-link">Registrarse</a>
+      </div>
+      <div *ngIf="errorMessage" class="help-block" style="color: tomato">{{errorMessage}}</div>
+      <div *ngIf="!firstTime && (usernameError || passwordError)" class="help-block" style="color: tomato">Por favor introduzca todos los campos</div>
+    </form>
+  </div>

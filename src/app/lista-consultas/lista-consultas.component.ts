@@ -24,7 +24,11 @@ export class ListaDeConsultasComponent implements OnInit {
 
   ngOnInit() {
     this.conexionService.listaDeConsultas().subscribe(consulta=>{
-      this.listaDeConsultas =consulta;
+      this.listaDeConsultas=[];
+      let usuarioLogeado = JSON.parse(localStorage.getItem("UserLogged"));
+      consulta.forEach((element:any) => {
+        if(element.auth == usuarioLogeado.auth) this.listaDeConsultas.push(element);
+      });
       this.verificarOrden(this.verificarOrden);
     });
   }
@@ -61,11 +65,22 @@ export class ListaDeConsultasComponent implements OnInit {
     this.router.navigateByUrl('/registrarConsulta');
   }
 
+  editarConsulta(consulta:any){
+    this.router.navigate(['/editarConsulta', consulta.auth])
+  }
+
+  borrarConsulta(consulta){
+    this.conexionService.eliminarConsulta(consulta);
+  }
+
   back() {
     this.router.navigateByUrl('/historial');
   }
   RedirectTo(value:any){
     switch(value){
+      case "usuario":
+      this.router.navigateByUrl('/verUsuario')
+      break;
       case "historial":
       this.router.navigateByUrl('/historial')
       break;
@@ -82,5 +97,10 @@ export class ListaDeConsultasComponent implements OnInit {
       this.router.navigateByUrl('/listaDeTratamientos');
       break;
     }
+  }
+  logout(){
+    if (localStorage.getItem('UserLogged'))
+    localStorage.removeItem('UserLogged');
+    this.router.navigateByUrl('/login');
   }
 }

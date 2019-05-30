@@ -24,14 +24,16 @@ export class ListaDeAnalisisComponent implements OnInit {
 
   ngOnInit() {
     this.conexionService.listaDeAnalisis().subscribe(analisis=>{
-      this.listaDeAnalisis =analisis;
-      this.verificarOrden(this.listaDeAnalisis);
+      this.listaDeAnalisis=[];
+      let usuarioLogeado = JSON.parse(localStorage.getItem("UserLogged"));
+        analisis.forEach((element:any) => {
+          if(element.auth == usuarioLogeado.auth) this.listaDeAnalisis.push(element);
+        });
+        this.verificarOrden(this.listaDeAnalisis);
     });
   }
-  
 
   verificarOrden(historial:any){
-    console.log("fecha",historial)
     let aux;
     for(let i=0;i<historial.length-1;i++){
       for(let j=i+1;j<historial.length;j++){
@@ -48,7 +50,6 @@ export class ListaDeAnalisisComponent implements OnInit {
     let dia;
     let mes;
     let anio;
-    console.log("this",fecha)
     dia = fecha.substring(fecha.indexOf("/")+1,fecha.lastIndexOf("/"));
     if(dia.length==1)
       dia = "0"+dia;
@@ -66,12 +67,19 @@ export class ListaDeAnalisisComponent implements OnInit {
   back() {
     this.router.navigateByUrl('/historial');
   }
+  borrarAnalisis(analisis){
+    this.conexionService.eliminarAnalisis(analisis);
+    this.ngOnInit();
+  }
 
   editarAnalisis(analisis:any){
     this.router.navigate(['/editarAnalisis', analisis.auth])
   }
   RedirectTo(value:any){
     switch(value){
+      case "usuario":
+      this.router.navigateByUrl('/verUsuario')
+      break;
       case "historial":
       this.router.navigateByUrl('/historial')
       break;
@@ -88,5 +96,10 @@ export class ListaDeAnalisisComponent implements OnInit {
       this.router.navigateByUrl('/listaDeTratamientos');
       break;
     }
+  }
+  logout(){
+    if (localStorage.getItem('UserLogged'))
+    localStorage.removeItem('UserLogged');
+    this.router.navigateByUrl('/login');
   }
 }
